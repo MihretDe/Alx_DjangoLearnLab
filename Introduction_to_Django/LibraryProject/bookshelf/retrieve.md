@@ -1,23 +1,12 @@
-
----
-
-## ✅ `retrieve.md`
-
-```markdown
 # Retrieve the Book instance
 
 ```python
 from bookshelf.models import Book
 
-# Retrieve all Book instances
-books = Book.objects.all()
+# Retrieve the Book by ID
+book = Book.objects.get(id=1)
 
-books
-# <QuerySet [<Book: Book object (1)>]>
-
-# Display attributes of the first book
-book = books.first()
-
+# Display attributes
 book.id
 # 1
 
