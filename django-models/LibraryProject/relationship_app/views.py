@@ -2,7 +2,8 @@ from django.shortcuts import render
 from urllib3 import HTTPResponse
 from .models import Book 
 from .models import Library
-from django.views.generic import DetailView
+from django.views.generic.detail import DetailView
+
 
 def list_books(request):
     books = Book.objects.all()  
