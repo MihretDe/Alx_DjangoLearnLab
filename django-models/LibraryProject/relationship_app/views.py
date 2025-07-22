@@ -6,6 +6,8 @@ from django.views.generic.detail import DetailView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth import logout
+from django.views.generic import CreateView
+from django.urls import reverse_lazy
 
 def list_books(request):
     books = Book.objects.all()  
@@ -20,12 +22,6 @@ class LibraryDetailView(DetailView):
 
 
 
-def register(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('login')  # Redirect to login after successful registration
-    else:
-        form = UserCreationForm()
-    return render(request, 'registration/register.html', {'form': form})
+class RegisterView(CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy('login')
