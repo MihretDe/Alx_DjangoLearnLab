@@ -22,10 +22,13 @@ class LibraryDetailView(DetailView):
 
 
 
-class RegisterView(CreateView):
-    form_class = UserCreationForm
-    template_name = 'registration/register.html'
-    success_url = reverse_lazy('login')
+def register(request):
+    form = UserCreationForm()
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('list_books')  # or any page after login
 
-# Add this for the checker
-register = RegisterView.as_view()
+    return render(request, 'relationship_app/register.html', {'form': form})
