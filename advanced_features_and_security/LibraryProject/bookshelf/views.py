@@ -28,3 +28,15 @@ def delete_article(request, pk):
     article = get_object_or_404(Article, pk=pk)
     article.delete()
     return render(request, 'articles/delete_success.html')
+
+def form_example(request):
+    if request.method == 'POST':
+        form = ExampleForm(request.POST)
+        if form.is_valid():
+            # Process form data here
+            form.save()  # Or any other processing
+            return redirect('success')  # Redirect after successful submission
+    else:
+        form = ExampleForm()
+
+    return render(request, 'bookshelf/form_example.html', {'form': form})
